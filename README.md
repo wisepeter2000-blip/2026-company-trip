@@ -24,4 +24,4 @@ python -m http.server 8000
 
 將網站推送至 GitHub 後，在儲存庫設定的 **Pages** 頁面，將來源設為 `Deploy from a branch`、分支設為 `main`、資料夾設為 `/ (root)`。部署完成後，將網站網址補入下方。
 
-網站網址：待部署
+網站網址：https://wisepeter2000-blip.github.io/2026-company-trip/
