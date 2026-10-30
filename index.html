@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5fbff">
+    <title>2026 宇宙科技公司員工旅遊</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="event-heading">
+        <p class="eyebrow">宇宙科技公司・年度限定活動</p>
+        <h1>2026 宇宙科技公司員工旅遊</h1>
+        <p class="heading-note">一起出發，探索工作以外的精彩宇宙。</p>
+      </header>
+
+      <section class="cover-section" aria-label="活動主視覺">
+        <img class="cover-image" src="cover.png" alt="2026 宇宙科技公司員工旅遊活動主視覺">
+        <span class="cover-badge">MISSION 2026</span>
+      </section>
+
+      <div class="content-grid">
+        <section class="schedule-card" aria-labelledby="schedule-title">
+          <div class="section-heading">
+            <span class="section-icon" aria-hidden="true">✦</span>
+            <div>
+              <p class="eyebrow">THE ITINERARY</p>
+              <h2 id="schedule-title">活動流程</h2>
+            </div>
+          </div>
+          <ol class="schedule-list">
+            <li><time>08:00</time><span>報到</span></li>
+            <li><time>09:00</time><span>場次一</span></li>
+            <li><time>10:00</time><span>break time</span></li>
+            <li><time>10:30</time><span>場次二</span></li>
+            <li><time>11:30</time><span>Q&amp;A</span></li>
+            <li><time>12:00</time><span>活動結束</span></li>
+          </ol>
+          <p class="schedule-note">期待和你一起創造今年最棒的回憶！</p>
+        </section>
+
+        <section class="signup-card" aria-labelledby="signup-title">
+          <div class="section-heading">
+            <span class="section-icon signup-icon" aria-hidden="true">✎</span>
+            <div>
+              <p class="eyebrow">SAVE YOUR SEAT</p>
+              <h2 id="signup-title">報名參加</h2>
+            </div>
+          </div>
+          <form id="signup-form" target="submission-frame" method="post">
+            <label for="name">姓名 <span class="required">必填</span></label>
+            <input id="name" name="name" autocomplete="name" required maxlength="100">
+
+            <label for="email">Email <span class="required">必填</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" required maxlength="254">
+
+            <label for="phone">電話 <span class="required">必填</span></label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" required maxlength="30">
+
+            <label for="title">職稱 <span class="optional">選填</span></label>
+            <input id="title" name="title" autocomplete="organization-title" maxlength="100">
+
+            <button id="submit-button" type="submit">送出報名 <span aria-hidden="true">→</span></button>
+            <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+          </form>
+          <iframe name="submission-frame" title="報名資料送出結果" class="submission-frame"></iframe>
+        </section>
+
+        <section class="attendees-card" aria-labelledby="attendees-title">
+          <div class="section-heading">
+            <span class="section-icon attendee-icon" aria-hidden="true">♡</span>
+            <div>
+              <p class="eyebrow">OUR CREW</p>
+              <h2 id="attendees-title">報名名單</h2>
+            </div>
+          </div>
+          <p id="attendee-count" class="attendee-count">載入報名名單中…</p>
+          <ul id="attendee-list" class="attendee-list" aria-live="polite"></ul>
+        </section>
+      </div>
+      <footer>宇宙科技公司 <span aria-hidden="true">✦</span> 2026 員工旅遊</footer>
+    </main>
+  </body>
+</html>
