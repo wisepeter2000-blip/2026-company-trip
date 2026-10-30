@@ -1,4 +1,5 @@
 const SPREADSHEET_NAME = "2026_公司旅遊";
+const SPREADSHEET_ID_PROPERTY = "REGISTRATION_SPREADSHEET_ID";
 const HEADERS = ["姓名", "Email", "電話", "職稱", "報名時間"];
 
 function doGet(e) {
@@ -53,13 +54,16 @@ function doPost(e) {
 }
 
 function getSheet_() {
-  const files = DriveApp.getFilesByName(SPREADSHEET_NAME);
+  const properties = PropertiesService.getScriptProperties();
+  let spreadsheetId = properties.getProperty(SPREADSHEET_ID_PROPERTY);
   let spreadsheet;
 
-  if (files.hasNext()) {
-    spreadsheet = SpreadsheetApp.open(files.next());
+  if (spreadsheetId) {
+    spreadsheet = SpreadsheetApp.openById(spreadsheetId);
   } else {
     spreadsheet = SpreadsheetApp.create(SPREADSHEET_NAME);
+    spreadsheetId = spreadsheet.getId();
+    properties.setProperty(SPREADSHEET_ID_PROPERTY, spreadsheetId);
   }
 
   let sheet = spreadsheet.getSheets()[0];
