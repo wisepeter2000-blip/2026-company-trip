@@ -1,4 +1,5 @@
-const SCRIPT_URL = "";
+const SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbzt34Sr57jIO2zHs1pyl3ajnHKxXWSC_ffx47XetAOrkqImq4WztC6Jzxev1a6DnJhldw/exec";
 
 const form = document.querySelector("#signup-form");
 const submitButton = document.querySelector("#submit-button");

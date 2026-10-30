@@ -14,10 +14,10 @@ python -m http.server 8000
 
 ## Google 試算表與 Apps Script
 
-1. 在 Google Apps Script 建立新專案，將 `apps-script/Code.gs` 貼入編輯器。
+1. Apps Script 專案使用 `apps-script/Code.gs`。
 2. 部署為網頁應用程式，執行身分選「我」、存取權選「所有人」，並完成 Google 登入與授權。
-3. 第一次執行時，Apps Script 會在 Google Drive 建立 `2026_公司旅遊` 試算表，建立標題列，並將「電話」欄設為純文字。
-4. 將部署產生的 `/exec` 網址填入 `app.js` 的 `SCRIPT_URL`，再更新 GitHub Pages。
+3. 第一次載入報名名單時，Apps Script 會在 Google Drive 建立 `2026_公司旅遊` 試算表、標題列，並將「電話」欄設為純文字。
+4. 已部署的 `/exec` 網址設定於 `app.js` 的 `SCRIPT_URL`。更新前端程式後，請重新更新 GitHub Pages。
 5. 網頁報名成功後，資料會寫入試算表，報名名單也會隨之更新。
 
 ## GitHub Pages
