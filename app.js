@@ -6,10 +6,12 @@ const submitButton = document.querySelector("#submit-button");
 const statusMessage = document.querySelector("#form-status");
 const attendeeList = document.querySelector("#attendee-list");
 const attendeeCount = document.querySelector("#attendee-count");
-const submissionFrame = document.querySelector(".submission-frame");
+const appsScriptOriginPattern =
+  /^https:\/\/(?:script\.google\.com|script\.googleusercontent\.com|[a-z0-9-]+-script\.googleusercontent\.com)$/i;
 
 let submitted = false;
 let attendeeCallbackName = "";
+let activeRequestToken = "";
 
 if (SCRIPT_URL) {
   form.action = SCRIPT_URL;
@@ -79,6 +81,8 @@ form.addEventListener("submit", () => {
   }
 
   submitted = false;
+  activeRequestToken = crypto.randomUUID();
+  form.action = `${SCRIPT_URL}?requestToken=${encodeURIComponent(activeRequestToken)}`;
   submitButton.disabled = true;
   showStatus("正在送出報名…");
   window.setTimeout(() => {
@@ -90,10 +94,19 @@ form.addEventListener("submit", () => {
 });
 
 window.addEventListener("message", (event) => {
-  if (event.source !== submissionFrame.contentWindow) return;
-  if (!event.data || event.data.type !== "event-registration") return;
+  if (!appsScriptOriginPattern.test(event.origin)) return;
+  if (
+    !event.data ||
+    event.data.type !== "event-registration" ||
+    !activeRequestToken ||
+    (event.data.requestToken &&
+      event.data.requestToken !== activeRequestToken)
+  ) {
+    return;
+  }
 
   submitted = true;
+  activeRequestToken = "";
   submitButton.disabled = false;
   if (event.data.ok) {
     form.reset();

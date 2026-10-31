@@ -28,28 +28,33 @@ function doGet(e) {
 }
 
 function doPost(e) {
+  const parameters = e && e.parameter ? e.parameter : {};
+  const candidateToken = String(parameters.requestToken || "");
+  const requestToken = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(candidateToken)
+    ? candidateToken
+    : "";
+
   try {
-    const parameters = e && e.parameter ? e.parameter : {};
     const name = String(parameters.name || "").trim();
     const email = String(parameters.email || "").trim();
     const phone = String(parameters.phone || "").trim();
     const title = String(parameters.title || "").trim();
 
     if (!name || !email || !phone) {
-      return submissionResult_(false, "請填寫姓名、Email 和電話。");
+      return submissionResult_(false, "請填寫姓名、Email 和電話。", requestToken);
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return submissionResult_(false, "Email 格式不正確。");
+      return submissionResult_(false, "Email 格式不正確。", requestToken);
     }
 
     const sheet = getSheet_();
     const phoneColumn = HEADERS.indexOf("電話") + 1;
     sheet.getRange(1, phoneColumn, sheet.getMaxRows(), 1).setNumberFormat("@");
     sheet.appendRow([name, email, phone, title, new Date()]);
-    return submissionResult_(true, "報名成功！");
+    return submissionResult_(true, "報名成功！", requestToken);
   } catch (error) {
     console.error(error);
-    return submissionResult_(false, "系統暫時無法處理報名，請稍後再試。");
+    return submissionResult_(false, "系統暫時無法處理報名，請稍後再試。", requestToken);
   }
 }
 
@@ -87,11 +92,12 @@ function getSheet_() {
   return sheet;
 }
 
-function submissionResult_(ok, message) {
+function submissionResult_(ok, message, requestToken) {
   const payload = JSON.stringify({
     type: "event-registration",
     ok: ok,
     message: message,
+    requestToken: requestToken,
   });
   const html = `<script>window.top.postMessage(${payload}, "*");</script>`;
   return HtmlService.createHtmlOutput(html)
