@@ -50,7 +50,10 @@ function doPost(e) {
     const sheet = getSheet_();
     const phoneColumn = HEADERS.indexOf("電話") + 1;
     sheet.getRange(1, phoneColumn, sheet.getMaxRows(), 1).setNumberFormat("@");
-    sheet.appendRow([name, email, phone, title, new Date()]);
+    const nextRow = sheet.getLastRow() + 1;
+    sheet.getRange(nextRow, phoneColumn).setNumberFormat("@");
+    sheet.getRange(nextRow, 1, 1, HEADERS.length)
+      .setValues([[name, email, phone, title, new Date()]]);
     return submissionResult_(true, "報名成功！", requestToken);
   } catch (error) {
     console.error(error);

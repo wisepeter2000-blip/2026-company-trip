@@ -25,3 +25,7 @@ python -m http.server 8000
 GitHub Pages 已使用 `main` 分支根目錄發佈。
 
 網站網址：https://wisepeter2000-blip.github.io/2026-company-trip/
+
+## 維護文件
+
+系統架構、資料流、部署設定與故障排除請參考 [`doc/system-maintenance.md`](./doc/system-maintenance.md)。
